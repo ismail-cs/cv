@@ -60,5 +60,58 @@ $(document).ready(function(){
 
 
     sectionObserver.observe(counterSection);
+ 
+    // image filter
+
+    var $wrapper = $('.portfolio_wrapper');
+
+    $wrapper.isotope({
+        filter : '*',
+        layoutMode : 'masonry',
+        animationOptions : {
+            duration: 750,
+            easing: 'linear'
+        }
+    });
+
+    let links = document.querySelectorAll('.tabs a');
+
+    links.forEach(link =>{
+
+        let selector = link.dataset.filter;
+        link.addEventListener('click', function(e){
+            e.preventDefault();
+
+            $wrapper.isotope({
+                filter : selector,
+                layoutMode : 'masonry',
+                animationOptions : {
+                    duration: 750,
+                    easing: 'linear'
+                }
+            });
+
+            links.forEach(link =>{
+                link.classList.remove('active');
+            })
+
+            e.target.classList.add('active');
+
+        });
+    })
+
+    
+    // Magnifi pop up
+
+    $('.magnifi').magnificPopup({
+        type: 'image',
+        gallery: {
+            enabled : true
+        },
+        zoom : {
+            enable: true
+        }
+    });
+
 
 });
